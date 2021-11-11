@@ -6,7 +6,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class UpdateContent {
-
     @Getter
     @Setter
     @AllArgsConstructor
@@ -22,5 +21,4 @@ public class UpdateContent {
         @Size(min = 1, max = 100, message = "content size must be 1 to 100")
         private String content;
     }
-
 }

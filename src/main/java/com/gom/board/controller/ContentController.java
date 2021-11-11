@@ -1,16 +1,12 @@
 package com.gom.board.controller;
 
-import com.gom.board.dto.ContentDTO;
-import com.gom.board.dto.ContentDetailDTO;
-import com.gom.board.dto.CreateContent;
-import com.gom.board.dto.UpdateContent;
+import com.gom.board.dto.*;
 import com.gom.board.service.ContentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RequestMapping("contents")
 @RestController
@@ -21,28 +17,28 @@ public class ContentController {
     private final ContentService contentService;
 
     @PostMapping("")
-    public CreateContent.Response createContent(@Valid @RequestBody final CreateContent.Request request){
-        return contentService.createContent(request);
+    public APIResponse createContent(@Valid @RequestBody final CreateContent.Request request){
+        return APIResponse.of(contentService.createContent(request));
     }
 
     @GetMapping("")
-    public List<ContentDTO> getContents(){
-        return contentService.getAllContents();
+    public APIResponse getContents(){
+        return APIResponse.of(contentService.getAllContents());
     }
 
     @GetMapping("/{id}")
-    public ContentDetailDTO getContentDetail(@PathVariable final Long id){
-        return contentService.getContentDetail(id);
+    public APIResponse getContentDetail(@PathVariable final Long id){
+        return APIResponse.of(contentService.getContentDetail(id));
     }
 
     @PutMapping("/{id}")
-    public ContentDetailDTO updateContent(@PathVariable final Long id, @Valid @RequestBody UpdateContent.Request request){
-        return contentService.updateContent(id, request);
+    public APIResponse updateContent(@PathVariable final Long id, @Valid @RequestBody UpdateContent.Request request){
+        return APIResponse.of(contentService.updateContent(id, request));
     }
 
     @DeleteMapping("/{id}")
-    public ContentDetailDTO deleteContent(@PathVariable final Long id){
-        return contentService.deleteContent(id);
+    public APIResponse deleteContent(@PathVariable final Long id){
+        return APIResponse.of(contentService.deleteContent(id));
     }
 
 }

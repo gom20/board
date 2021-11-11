@@ -1,11 +1,12 @@
 package com.gom.board.service;
 
+import com.gom.board.constant.ErrorCode;
 import com.gom.board.dto.ContentDTO;
 import com.gom.board.dto.ContentDetailDTO;
 import com.gom.board.dto.CreateContent;
 import com.gom.board.dto.UpdateContent;
 import com.gom.board.entity.Content;
-import com.gom.board.exception.GeneralException;
+import com.gom.board.error.GeneralException;
 import com.gom.board.repository.ContentRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -36,7 +37,6 @@ public class ContentService {
         return modelMapper.map(
                 contentRepository.save(modelMapper.map(request, Content.class)),
                 CreateContent.Response.class);
-
     }
 
     @Transactional
@@ -60,7 +60,7 @@ public class ContentService {
     }
 
     private Content getDeveloperByMemberId(Long id){
-        return contentRepository.findByIdAndDeleteYN(id, DELETE_N).orElseThrow(() -> new GeneralException());
+        return contentRepository.findByIdAndDeleteYN(id, DELETE_N).orElseThrow(() -> new GeneralException(ErrorCode.BAD_REQUEST));
     }
 
 }
