@@ -22,7 +22,7 @@ public class ContentController {
     }
 
     @GetMapping("")
-    public APIResponse getContents(){
+    public APIResponse getAllContents(){
         return APIResponse.of(contentService.getAllContents());
     }
 
