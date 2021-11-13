@@ -9,10 +9,10 @@ import java.util.function.Predicate;
 @Getter
 @RequiredArgsConstructor
 public enum ErrorCode {
-    OK(0, "요청이 성공하였습니다."),
-    BAD_REQUEST(10000, "잘못된 요청입니다."),
-    INTERNAL_ERROR(20000, "서버 오류가 발생하였습니다."),
-    SPRING_INTERNAL_ERROR(20001, "Spring 오류가 발생하였습니다.");
+    OK(0, "Success"),
+    BAD_REQUEST(10000, "Bad Request"),
+    INTERNAL_ERROR(20000, "Server Internal Error"),
+    SPRING_INTERNAL_ERROR(20001, "Spring Internal Error");
 
     private final Integer code;
     private final String message;
