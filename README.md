@@ -1,8 +1,8 @@
 # Board
 
-**get contents**
+**Get Contents**
 ----
-  Returns json data about board
+  Returns a list of contents
 
 * **URL**
 
@@ -11,46 +11,37 @@
 * **Method:**
 
   `GET`
-  
-*  **URL Params**
-
-   None
-
-* **Data Params**
-
-  None
 
 * **Success Response:**
 
   * **Code:** 200 <br />
     **Content:** 
     ```javascript
-    { code: 0, 
-      message: "Success", 
-      data: {id: 1, 
-             name: "user", 
-             title: "test", 
-             content: "test", 
-             updatedAt:"2021-11-16T01:10:13 
-       }
-    }
+      {
+        "code": 0,
+        "message": "Success",
+        "data": [
+          {
+            "id": 9,
+            "name": "Elsa",
+            "title": "Test title by Elsa",
+            "updatedAt": "2021-11-15T21:42:49"
+          },
+          {
+            "id": 12,
+            "name": "Anna",
+            "title": "Test title by Anna",
+            "updatedAt": "2021-11-15T21:48:45"
+          }
+        ]
+      }
     ```
- 
-* **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ error : "User doesn't exist" }`
-
-  OR
-
-  * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** `{ error : "You are unauthorized to make this request." }`
-
-* **Sample Call:**
+    
+ * **Sample Call:**
 
   ```javascript
     $.ajax({
-      url: "/users/1",
+      url: "/contents",
       dataType: "json",
       type : "GET",
       success : function(r) {
@@ -58,15 +49,14 @@
       }
     });
   ```
-  
 
-**get contents**
+**Get Content Detail**
 ----
-  Returns json data about board
+  Returns a content detail
 
 * **URL**
 
-  /contents
+  /content/{id}
 
 * **Method:**
 
@@ -74,43 +64,31 @@
   
 *  **URL Params**
 
-   None
-
-* **Data Params**
-
-  None
+   id[required]
 
 * **Success Response:**
 
   * **Code:** 200 <br />
     **Content:** 
     ```javascript
-    { code: 0, 
-      message: "Success", 
-      data: {id: 1, 
-             name: "user", 
-             title: "test", 
-             content: "test", 
-             updatedAt:"2021-11-16T01:10:13 
-       }
+    {
+      "code": 0,
+      "message": "Success",
+      "data": {
+        "id": 9,
+        "name": "Elsa",
+        "title": "Test title by Elsa",
+        "content": "Test content2 by Elsa",
+        "updatedAt": "2021-11-15T21:42:49"
+      }
     }
     ```
  
-* **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ error : "User doesn't exist" }`
-
-  OR
-
-  * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** `{ error : "You are unauthorized to make this request." }`
-
 * **Sample Call:**
 
   ```javascript
     $.ajax({
-      url: "/users/1",
+      url: "/contents/9",
       dataType: "json",
       type : "GET",
       success : function(r) {
@@ -118,3 +96,60 @@
       }
     });
   ```
+
+**Create Content**
+----
+  Create content and return the content.
+
+* **URL**
+
+  /content
+
+* **Method:**
+
+  `PUT`
+
+* **Success Response:**
+
+  * **Code:** 200 <br /> 
+    **Content:** 
+    ```javascript
+    {
+      "code": 0,
+      "message": "Success",
+      "data": {
+        "name": "TestName",
+        "title": "TestTitle",
+        "content": "TestContent"
+      }
+    }
+    ```
+ 
+* **Sample Call:**
+
+  ```javascript
+    $.ajax({
+      url: "/contents/9",
+      dataType: "json",
+      data: {
+        name: "TestName",
+        title: "TestTitle",
+        content: "TestContent"
+      }
+      type : "POST",
+      success : function(r) {
+        console.log(r);
+      }
+    });
+  ```
+  
+  
+  * **Error Response:**
+
+  * **Content:** 
+    ```javascript
+     {
+      "code": 10000,
+      "message": "Bad Request"
+    }
+    ```
